@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <div>
+    <h1>Free Food Finder</h1>
+    <p>
+      {% if user and not user.is_anonymous %}
+        <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+      {% else %}
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+      {% endif %}
+      <ul>
+        {% for event in events %}
+          <li> {{event.name}}: {{event.description}} </li>
+        {% endfor %}
+      </ul>
+    </p>
+  </div>
+{% endblock %}
