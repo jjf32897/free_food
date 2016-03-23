@@ -24,6 +24,7 @@ SECRET_KEY = 'i)^*1w3ptoo=1y6*mh3zqb%6lb+o8^gh_9@=gn6#h@r^6d*l@t'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '471947432998292'
 SOCIAL_AUTH_FACEBOOK_SECRET = '5b53fff3ec2d74d08d4993226ab848cd'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['user_location']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

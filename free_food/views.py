@@ -1,3 +1,4 @@
+import requests, json
 from django.shortcuts import render
 from facepy import GraphAPI
 
@@ -14,10 +15,19 @@ def index(request):
         graph = GraphAPI(access_token)
 
         filtered = []
-        events = graph.search('free food', 'event', page=False, retry=3, center={'longitude': 40.4842, 'latitude': 88.9936}, distance=1000)
+
+        location = graph.get('me?fields=location')['location']['name']
+        events = graph.search(location, 'event', page=False, retry=3, center={'longitude': 40.4842, 'latitude': 88.9936}, distance=1000)
+
+        # query = 'Bloomington, IL'
+        # url = 'https://graph.facebook.com/search?q=%s&type=event' % query
+        # parameters = {'access_token': access_token}
+        # r = requests.get(url, params = parameters)
+        # events = json.loads(r.text)
+
         for event in events['data']:
-            if parse_event(event):
-                filtered.append(event)
+            # if parse_event(event):
+            filtered.append(event)
 
         return render(request, 'index.html', {'user': request.user, 'events': filtered})
 
